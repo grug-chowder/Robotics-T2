@@ -1,0 +1,188 @@
+#region VEXcode Generated Robot Configuration
+#code in plain text may not be up to date
+from vex import *
+import urandom
+import math
+
+# Brain should be defined by default
+brain = Brain()
+
+# Robot configuration code
+brain_inertial = Inertial()
+optical_1 = Optical(Ports.PORT1)
+motor_2 = Motor(Ports.PORT2, False)
+motor_3 = Motor(Ports.PORT3, False)
+
+
+# Wait for sensor(s) to fully initialize
+wait(100, MSEC)
+
+# generating and setting random seed
+def initializeRandomSeed():
+    wait(100, MSEC)
+    xaxis = brain_inertial.acceleration(XAXIS) * 1000
+    yaxis = brain_inertial.acceleration(YAXIS) * 1000
+    zaxis = brain_inertial.acceleration(ZAXIS) * 1000
+    systemTime = brain.timer.system() * 100
+    urandom.seed(int(xaxis + yaxis + zaxis + systemTime)) 
+
+# Initialize random seed 
+initializeRandomSeed()
+
+
+# Color to String Helper
+def convert_color_to_string(col):
+    if col == Color.RED:
+        return "red"
+    if col == Color.GREEN:
+        return "green"
+    if col == Color.BLUE:
+        return "blue"
+    if col == Color.WHITE:
+        return "white"
+    if col == Color.YELLOW:
+        return "yellow"
+    if col == Color.ORANGE:
+        return "orange"
+    if col == Color.PURPLE:
+        return "purple"
+    if col == Color.CYAN:
+        return "cyan"
+    if col == Color.BLACK:
+        return "black"
+    if col == Color.TRANSPARENT:
+        return "transparent"
+    return ""
+
+#endregion VEXcode Generated Robot Configuration
+# ------------------------------------------
+# 
+# 	Project:      VEXcode Project
+#	Author:       VEX
+#	Created:
+#	Description:  VEXcode EXP Python Project
+# 
+# ------------------------------------------
+
+# Library imports
+from vex import *
+brain.screen.print("VEXcode")
+
+# Begin project code
+
+def bounds(hue_x,brightness_y,goal):
+    #          hue_min,hue_max,bright_min,bright_max
+    a_bounds = [190,240,40,101] #blue
+    b_bounds = [0,10,20,65]#red
+    c_bounds = [60,80,40,101]#green
+    #d_bounds = [30,45, 80,101]#yellow
+
+    if goal == "A":
+        bounds = a_bounds
+    elif goal == "B":
+        bounds = b_bounds
+    elif goal == "C":
+        bounds = c_bounds
+    
+    #elif goal == "D":            yellow has been removed due to being too close to metal coloured
+    #    bounds = d_bounds
+    
+    
+    if (hue_x >= bounds[0]
+    and hue_x <= bounds[1]
+    and brightness_y >= bounds[2]
+    and brightness_y <= bounds[3]):
+        return True
+    else:
+        return False
+
+
+def marbleA():
+    brain.screen.print("blue")
+    #rotate cup to desired position 
+    motor_3.spin_to_position(-90,DEGREES)
+    
+
+def marbleB():
+    brain.screen.print("red")
+    #rotate cup to desired position
+    motor_3.spin_to_position(-90,DEGREES)
+    
+
+def marbleC():
+    brain.screen.print("green")
+    #rotate cup to desired position 
+    motor_3.spin_to_position(-90,DEGREES)
+
+def marbleD():
+    brain.screen.print("yellow")
+
+    motor_3.spin_to_position(-90,DEGREES)
+    
+
+    
+
+
+optical_1.set_light(LedStateType.ON)
+
+last = [",",",",","]
+pos = 1
+while True:
+    wait(0.3,SECONDS) #reduce the damn polling rate
+    motor_2.spin_to_position(0,DEGREES)
+    motor_3.spin_to_position(0,DEGREES)
+    x = optical_1.hue()
+    y = optical_1.brightness()
+
+    brain.screen.clear_row(1)
+    brain.screen.clear_row(2)
+    brain.screen.set_cursor(1,1)
+    brain.screen.print(x)
+    brain.screen.set_cursor(2,1)
+    brain.screen.print(y)
+    brain.screen.clear_row(3)
+    brain.screen.set_cursor(3,1)
+
+    if pos >= 3:
+        pos = 0
+
+    if last[0] == last[1] and last[0] == last[2]:
+        if last[0] == "A":
+            marbleA()
+
+        elif last[0] == "B":
+            marbleB()
+
+        elif last[0] == "C":
+            marbleC()
+
+        elif last[0] == "D":
+            marbleD()
+
+        else:
+            brain.screen.print("nothing")
+    else:
+        brain.screen.print("maybe something")
+    
+    if bounds(x,y,"A"):
+        last[pos] = "A"
+        pos += 1
+
+    elif bounds(x,y,"B"):
+        last[pos] = "B"
+        pos += 1
+
+    elif bounds(x,y,"C"):
+        last[pos] = "C"
+        pos += 1
+
+    #elif bounds(x,y,"D"):
+    #    last[pos] = "D"
+    #    pos += 1
+
+    else:
+        last[pos] = "E"
+        pos += 1
+        
+
+    pass
