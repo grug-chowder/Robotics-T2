@@ -44,3 +44,7 @@ Fast Polling: The loop runs every 50ms to ensure high-speed detection.
 Stability Logic: The code uses a "rolling buffer" (a list of the last 3 readings). It only sorts when it sees 2 identical color readings in a row, preventing "flicker" errors or false positives from motion.
 
 Calibrated Bounds: Unlike simple color sensing, this uses specific Hue/Brightness ranges to differentiate between similar-looking objects.
+
+
+Code Setup:
+The code is compiled and downloaded to the vex brain using VexcodeEXP v5
