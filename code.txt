@@ -3,7 +3,7 @@ from vex import *
 import urandom
 import math
 
-# Brain should be defined by default.
+# Brain should be defined by default
 brain = Brain()
 
 # Robot configuration code
@@ -117,11 +117,11 @@ def marbleD():
 
 optical_1.set_light(LedStateType.ON)
 
-last = ["E", "E", "E"]
+last = ["E", "E"]
 pos = 0
 
 while True:
-    wait(50, MSEC)  # fast polling — was 300ms, now 50ms
+    wait(50, MSEC)  #polling was 300ms, now 50ms
     motor_3.spin_to_position(0,DEGREES)
 
     x = optical_1.hue()
@@ -139,13 +139,13 @@ while True:
 
     # Store colour reading into rolling buffer
     if bounds(x, y, "A"):
-        last[pos % 3] = "A"
+        last[pos % 2] = "A"
     elif bounds(x, y, "B"):
-        last[pos % 3] = "B"
+        last[pos % 2] = "B"
     elif bounds(x, y, "C"):
-        last[pos % 3] = "C"
+        last[pos % 2] = "C"
     else:
-        last[pos % 3] = "E"
+        last[pos % 2] = "E"
 
     pos += 1
 
@@ -154,9 +154,9 @@ while True:
         detected = last[0]
 
         # Reset motors non-blocking, brief settle time
-        motor_2.spin_to_position(0, DEGREES, wait=False)
-        motor_3.spin_to_position(0, DEGREES, wait=False)
-        wait(200, MSEC)
+        #motor_2.spin_to_position(0, DEGREES, wait=False)
+        #motor_3.spin_to_position(0, DEGREES, wait=False)
+        #wait(200, MSEC)
 
         if detected == "A":
             marbleA()
@@ -168,7 +168,7 @@ while True:
             marbleD()
 
         # Clear buffer to prevent immediate re-trigger
-        last = ["E", "E", "E"]
+        last = ["E", "E"]
         pos = 0
 
     else:
