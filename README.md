@@ -17,9 +17,9 @@ Hardware Requirements
 Assembly
 Optical Sensor: Mount the sensor approximately 5-10mm from the marble path to ensure consistent brightness readings.
 
-Motor 2 (The Selector): Attach to a rotating tray or arm. Calibrate it so that 0°, 120°, and 240° align with your three collection bins.
+Motor 2 (The Selector): Attach to a rotating tray or wheel. Calibrate it so that 0°, 120°, and 240° align with your three collection bins.
 
-Motor 3 (The Ejector): Attach to a gate or plunger mechanism. The code expects 0° to be "closed" and -90° to be "eject."
+Motor 3 (The Ejector): Attach to a gate. The code expects 0° to be "closed" and -90° to be "eject."
 
 Usage
 Power On: Turn on the VEX EXP Brain and load the Python project.
