@@ -48,3 +48,11 @@ Calibrated Bounds: Unlike simple color sensing, this uses specific Hue/Brightnes
 
 Code Setup:
 The code is compiled and downloaded to the vex brain using VexcodeEXP v5
+
+References:
+1.Lam, D. K., Ngo, N. M., & Ngo, H. Q. T. (2023). Profile generation using the filtering technique for the fast motion and smooth performance in the hardware level of autonomous system. IET Science, Measurement & Technology.
+ Provides the theoretical justification for your "Rolling Buffer" logic. It explains how software filters mitigate noise and physical limitations to ensure smooth hardware actuation.
+ https://digital-library.theiet.org/doi/full/10.1049/smt2.12158
+ 2. model design inspired by:
+ https://youtu.be/W9dm_WjWROg?si=ybwX4cw-IeKXgCwF
+ 
