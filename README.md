@@ -55,4 +55,11 @@ Provides the theoretical justification for your "Rolling Buffer" logic. It expla
 https://digital-library.theiet.org/doi/full/10.1049/smt2.12158
 2. model design inspired by:
  https://youtu.be/W9dm_WjWROg?si=ybwX4cw-IeKXgCwF
+
+ video link :
+ https://shu.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=1585258e-9e98-4b87-97fb-b42d00cf737d
+
+ 3. AITS- 2.
+    
+
  
